@@ -1,0 +1,19 @@
+{
+  "name": "video-chat-server",
+  "version": "0.1.0",
+  "description": "Server for React video chat client",
+  "main": "server.js",
+  "repository": "",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "awake-heroku": "^1.0.17",
+    "clmtrackr": "^1.1.2",
+    "express": "^4.17.1",
+    "express-sslify": "^1.2.0",
+    "lodash": "^4.17.20",
+    "nuka-carousel": "^5.1.3",
+    "p5": "^1.4.1",
+    "socket.io": "^3.0.1"
+  }
+}
