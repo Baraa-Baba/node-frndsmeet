@@ -12,10 +12,10 @@ const _ = require("lodash");
 
 // app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
-app.use(express.static("./client/build"));
+app.use(express.static("./build"));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
 let users = [];
@@ -36,8 +36,7 @@ io.on("connection", (socket) => {
       io.to(answer.id).emit("answer", answer) 
     });
   
-    socket.on('candidate', (candidate) => {
-      // Broadcast candidate to all other clients
+    socket.on('candidate', (candidate) => { 
       socket.broadcast.emit('candidate', candidate);
     });
   
