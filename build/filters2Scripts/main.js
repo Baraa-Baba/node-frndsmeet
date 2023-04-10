@@ -1,4 +1,4 @@
-import NN_VERYLIGHT_1 from './neuralNets/NN_VERYLIGHT_1.json' assert { type: "json" };
+import NN_STANDARD_2 from './neuralNets/NN_STANDARD_2.json' assert { type: "json" };
 import { GLTFLoader } from './GLTFLoader.js'   
 let THREECAMERA = null;
 var mainChanger1
@@ -63,12 +63,7 @@ function init_threeScene(spec) {
 } // end init_threeScene()
 
 // launched by body.onload():
-function main() { 
-        const c = document.getElementById('jeeFaceFilterCanvas')
-        var video = document.getElementById("videoOfUser");
-        alert(video) 
-        c.height = 400
-        c.width = 600
+function main() {  
         init_faceFilter(null); 
 
     loadFilterModels()
@@ -276,7 +271,7 @@ function init_faceFilter(VIDEOELEMENT) {
         scanSettings:{
             nDetectsPerLoop :5.5,
         },
-        NNC: NN_VERYLIGHT_1, // root of NN_DEFAULT.json file
+        NNC: NN_STANDARD_2, // root of NN_DEFAULT.json file
         isKeepRunningOnWinFocusLost: true,
         maxFacesDetected: 3,
         videoSettings: {
@@ -287,7 +282,9 @@ function init_faceFilter(VIDEOELEMENT) {
                 console.log('AN ERROR HAPPENS. ERR =', errCode);
                 return;
             }
-
+            setTimeout(()=>{
+                document.getElementById('loadingFilters').style.display='none'
+            },3000)
             console.log('INFO: JEELIZFACEFILTER IS READY');
             init_threeScene(spec); 
         },
@@ -305,8 +302,7 @@ function handleFilterChange() {
     document.getElementById('chooseFilter').addEventListener('click', () => { 
         clearMainChanger()
         setTimeout(() => {
-            if(filter !== 'none'&&filter!=='inverted'&&!isRuned){
-                alert('jeff')
+            if(filter !== 'none'&&filter!=='inverted'&&!isRuned){ 
                 isRuned=true 
                }else{
             var filter = document.getElementById('filterValue').value
