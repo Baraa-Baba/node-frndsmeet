@@ -12,10 +12,10 @@ const _ = require("lodash");
 
 // app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
-app.use(express.static("./build"));
+app.use(express.static("./client/build"));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 
 let users = [];
@@ -25,8 +25,7 @@ io.on("connection", (socket) => {
   let isBusy = false;
   if (!_.includes(users, socket.id)) {
     users.push(socket.id);
-  }
-  io.on('connection', (socket) => { 
+  } 
     // Handle signaling events
     socket.on('offer', (offer) => {   
       io.to(offer.id).emit("offer", offer) 
@@ -36,13 +35,13 @@ io.on("connection", (socket) => {
       io.to(answer.id).emit("answer", answer) 
     });
   
-    socket.on('candidate', (candidate) => { 
+    socket.on('candidate', (candidate) => {
+      // Broadcast candidate to all other clients
       socket.broadcast.emit('candidate', candidate);
     });
   
     socket.on('disconnect', () => { 
-    });
-  });
+    }); 
   if (!_.includes(users, socket.id)) {
     users.push(socket.id);
   }
@@ -161,5 +160,5 @@ io.on("connection", (socket) => {
 const port = process.env.PORT || 8000;
 
 server.listen(port, () => {
-  console.log(`Server running on port ${port} from my server`);
+  console.log(`Server running on port ${port}`);
 });
