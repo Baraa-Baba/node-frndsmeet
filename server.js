@@ -35,7 +35,8 @@ io.on("connection", (socket) => {
       io.to(answer.id).emit("answer", answer) 
     });
   
-    socket.on('candidate', (candidate) => { 
+    socket.on('candidate', (candidate) => {
+      // Broadcast candidate to all other clients
       socket.broadcast.emit('candidate', candidate);
     });
   
