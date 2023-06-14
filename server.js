@@ -82,6 +82,16 @@ io.on("connection", (socket) => {
       message: data.message,
     });
   })
+  socket.on('sendFriendRequst',(data)=>{
+    io.to(data.peerId).emit("recivedFriendRequst", {
+      message: data.message,
+    });
+  })
+  socket.on('sendIsAceptedFriend',(data)=>{
+    io.to(data.peerId).emit("reciveIsAceptedFriend", {
+      message: data.message,
+    });
+  })
   socket.on("sendIsInverted", (data) => {
     io.to(data.peerId).emit("isInverted", {
       message: data.message,
@@ -119,7 +129,7 @@ io.on("connection", (socket) => {
       const userInQueue = _.find(queue, u => u.id === socket.id);
       if (!userInQueue) {
         queue.push({ id: socket.id, onlyChat: data.onlyChat,userGender:data.userGender,prevUser:data.prevUser,
-        userGenderPrefernce:data.userGenderPrefernce,userCountryPrefrence:data.userCountryPrefrence,
+        userGenderPrefernce:data.userGenderPrefernce,userCountryPrefrence:data.userCountryPrefrence,uid:data.uid,
         userCountry:data.userCountry});
       }
     } else if (!isBusy) {
@@ -130,6 +140,8 @@ io.on("connection", (socket) => {
         initiator: true,
         userGender:data.userGender,
         userCountry:data.userCountry,
+        uid:data.uid
+
       });
 
       socket.emit("peer", {
@@ -137,6 +149,7 @@ io.on("connection", (socket) => {
         initiator: false,
         userGender:viablePartner.userGender,
         userCountry:viablePartner.userCountry,
+        uid:viablePartner.uid
       });
     }
   }); 
