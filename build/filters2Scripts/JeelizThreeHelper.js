@@ -240,21 +240,13 @@ const JeelizThreeHelper = (function () {
         _threeCompositeObjects.forEach(function (threeCompositeObject, i) { 
             if (!threeCompositeObject.visible) return;    
             thisDS=ds[i]
-            
-            setTimeout(()=>{ 
-                if(!isBetweenFalseAndVisible){ 
+              
                     prevDS= ds[i]
                     PREVX=ds[i].x
-                console.log('changed')
-                setTimeout(()=>{
-                    if(!isBetweenFalseAndVisible){  
+                console.log('changed')  
                         prevDS.rx= ds[i].rx
                         prevDS.ry= ds[i].ry
-                        prevDS.rz= ds[i].rz
-                        }
-                },1500)
-                }
-            },1500)
+                        prevDS.rz= ds[i].rz 
          
             const detectState = ds[i];
 
