@@ -78,7 +78,7 @@ io.on("connection", (socket) => {
     });
   });
   socket.on("endCall",(data)=> {
-    io.to(data.peerId).emit("isCallEnded", {
+    io.to(data.peerId).emit("isCallEnded", { 
       message: data.message,
     });
   })
@@ -129,6 +129,7 @@ io.on("connection", (socket) => {
       const userInQueue = _.find(queue, u => u.id === socket.id);
       if (!userInQueue) {
         queue.push({ id: socket.id, onlyChat: data.onlyChat,userGender:data.userGender,prevUser:data.prevUser,
+          roomId:data.roomId,
         userGenderPrefernce:data.userGenderPrefernce,userCountryPrefrence:data.userCountryPrefrence,uid:data.uid,
         userCountry:data.userCountry});
       }
@@ -140,6 +141,7 @@ io.on("connection", (socket) => {
         initiator: true,
         userGender:data.userGender,
         userCountry:data.userCountry,
+        roomId:data.roomId,
         uid:data.uid
 
       });
@@ -149,6 +151,7 @@ io.on("connection", (socket) => {
         initiator: false,
         userGender:viablePartner.userGender,
         userCountry:viablePartner.userCountry,
+        roomId:viablePartner.roomId,
         uid:viablePartner.uid
       });
     }
@@ -170,7 +173,7 @@ io.on("connection", (socket) => {
   // });
 });
 
-const port = process.env.PORT || 8006;
+const port = process.env.PORT || 8000;
 
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
