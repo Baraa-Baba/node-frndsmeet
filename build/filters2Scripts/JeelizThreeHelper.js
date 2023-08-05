@@ -187,19 +187,15 @@ const JeelizThreeHelper = (function () {
                 }else if(thisDS.x-prevDS.x==0){ 
                 detectState.y-=0.2 
                 }else{
-                }
-             console.log('thisDs',thisDS.x)
-             console.log('prevDS',PREVX)    
-
-             console.log(`%c${thisDS.x-PREVX==0}`, 'color: green; background: yellow; font-size: 30px');
+                } 
+ 
             // if(detectState.x>1||detectState.x<-1) return
             //   detectState.y+= prevDS.y-thisDS.y
             //   detectState.z+= prevDS.z-thisDS.z
             //   tweak Y position depending on rx:
             // detectState.rx=prevDS.rx
             // detectState.ry=prevDS.ry
-            // detectState.rz=prevDS.rz
-            console.log('detect.x',detectState)
+            // detectState.rz=prevDS.rz 
              const tweak = _settings.tweakMoveYRotateX * Math.tan(detectState.rx);
              const cz = Math.cos(detectState.rz), sz = Math.sin(detectState.rz);
 
@@ -229,8 +225,7 @@ const JeelizThreeHelper = (function () {
  
             //    add translation part:
               _threeTranslation.set(x, y + _settings.pivotOffsetYZ[0], z + _settings.pivotOffsetYZ[1]);
-                threeCompositeObject.position.add(_threeTranslation); 
-              console.log('transtion added')
+                threeCompositeObject.position.add(_threeTranslation);  
                })
     }
     function update_poses(ds, threeCamera,randomm) {
@@ -242,8 +237,7 @@ const JeelizThreeHelper = (function () {
             thisDS=ds[i]
               
                     prevDS= ds[i]
-                    PREVX=ds[i].x
-                console.log('changed')  
+                    PREVX=ds[i].x  
                         prevDS.rx= ds[i].rx
                         prevDS.ry= ds[i].ry
                         prevDS.rz= ds[i].rz 
