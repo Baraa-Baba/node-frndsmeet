@@ -87,6 +87,7 @@ io.on("connection", (socket) => {
     });
   })
   socket.on('sendIsAceptedFriend',(data)=>{
+    console.log(data.peerId)
     io.to(data.peerId).emit("reciveIsAceptedFriend", {
       message: data.message,
     });
